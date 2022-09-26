@@ -23,7 +23,7 @@ const ContactForm = () =>{
         <Formik
         initialValues={{ name: '', email: '', message: ''}}        
         validationSchema={ContactSchema}
-        onSubmit={ async(values) =>{
+        onSubmit={ async(values, action) =>{
             const response = await fetch('api/sendgrid',{
                 body: JSON.stringify(values),
                   headers: {
@@ -31,7 +31,7 @@ const ContactForm = () =>{
                   },
                   method: "POST",
             });
-            
+            action.resetForm();
         }}
         >
             <Form>
